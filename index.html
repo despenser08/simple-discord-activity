@@ -7,45 +7,89 @@
       http-equiv="Content-Security-Policy"
       content="script-src 'self' 'unsafe-inline';"
     />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <form id="values">
-      <label for="clientid">Client ID: </label>
-      <input type="text" id="clientid" required />
+      <div style="width: 100%; overflow: auto">
+        <div style="float: left; width: 50%">
+          <label for="clientid">Client ID: </label>
+          <br />
+          <input type="text" id="clientid" required />
 
-      <br /><br />
+          <br /><br />
 
-      <label for="title">Title: </label>
-      <input type="text" id="title" required />
+          <strong>General</strong>
+          <br />
+          <label for="title">Title: </label>
+          <br />
+          <input type="text" id="title" required />
+          <br />
+          <label for="desc">Description: </label>
+          <br />
+          <textarea id="desc" cols="18" rows="3" required></textarea>
+          <br />
+          <label for="timestamp">Timestamp: </label>
+          <input type="checkbox" id="timestamp" checked />
 
-      <br />
+          <br /><br />
 
-      <label for="desc">Description: </label>
-      <input type="text" id="desc" required />
+          <strong>Large Image</strong>
+          <br />
+          <label for="imagename">Name: </label>
+          <br />
+          <input type="text" id="imagename" />
+          <br />
+          <label for="imagedesc">Description: </label>
+          <br />
+          <input type="text" id="imagedesc" />
 
-      <br />
+          <br /><br />
 
-      <label for="timestamp">Timestamp: </label>
-      <input type="checkbox" id="timestamp" checked />
+          <code id="result"></code>
+        </div>
 
-      <br /><br />
+        <div style="float: right; width: 50%">
+          <strong>Small Image</strong>
+          <br />
+          <label for="smallimagename">Name: </label>
+          <br />
+          <input type="text" id="smallimagename" />
+          <br />
+          <label for="smallimagedesc">Description: </label>
+          <br />
+          <input type="text" id="smallimagedesc" />
 
-      <label for="imagename">Image name: </label>
-      <input type="text" id="imagename" />
+          <br /><br />
 
-      <br />
+          <strong>Button 1</strong>
+          <br />
+          <label for="button1name">Name:</label>
+          <br />
+          <input type="text" id="button1name" />
+          <br />
+          <label for="button1url">URL: </label>
+          <br />
+          <input type="url" id="button1url" />
 
-      <label for="imagedesc">Image description: </label>
-      <input type="text" id="imagedesc" />
+          <br /><br />
 
-      <br /><br />
+          <strong>Button 2</strong>
+          <br />
+          <label for="button2name">Name:</label>
+          <br />
+          <input type="text" id="button2name" />
+          <br />
+          <label for="button2url">URL: </label>
+          <br />
+          <input type="url" id="button2url" />
 
-      <button type="submit">Update</button>
+          <br /><br />
+
+          <button class="btn" id="submitbtn" type="submit">Update</button>
+        </div>
+      </div>
     </form>
-
-    <br />
-
-    <code id="result"></code>
 
     <script src="renderer.js"></script>
   </body>
