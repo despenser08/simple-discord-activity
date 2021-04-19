@@ -1,10 +1,11 @@
 {
   "name": "simple-discord-activity",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Simple application helps you set discord activity",
   "main": "index.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build:win": "electron-builder -w"
   },
   "repository": {
     "type": "git",
@@ -23,9 +24,19 @@
   },
   "homepage": "https://github.com/despenser08/simple-discord-activity#readme",
   "devDependencies": {
-    "electron": "^12.0.4"
+    "electron": "^12.0.4",
+    "electron-builder": "^22.10.5"
   },
   "dependencies": {
     "discord-rpc": "^3.2.0"
+  },
+  "build": {
+    "appId": "com.github.despenser08.SimpleDiscordActivity",
+    "productName": "Simple Discord Activity",
+    "copyright": "Copyright (c) 2021 despenser08",
+    "files": [
+      "**/*",
+      "build/icon.*"
+    ]
   }
 }

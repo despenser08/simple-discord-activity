@@ -54,7 +54,7 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 475,
     height: 500,
-    icon: path.join(__dirname, "assets", "Discord.png"),
+    icon: path.join(__dirname, "build", "icon.png"),
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
