@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Simple Discord Activity</title>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-inline';"
+    />
+  </head>
+  <body>
+    <form id="values">
+      <label for="clientid">Client ID: </label>
+      <input type="text" id="clientid" required />
+
+      <br /><br />
+
+      <label for="title">Title: </label>
+      <input type="text" id="title" required />
+
+      <br />
+
+      <label for="desc">Description: </label>
+      <input type="text" id="desc" required />
+
+      <br />
+
+      <label for="timestamp">Timestamp: </label>
+      <input type="checkbox" id="timestamp" checked />
+
+      <br /><br />
+
+      <label for="imagename">Image name: </label>
+      <input type="text" id="imagename" />
+
+      <br />
+
+      <label for="imagedesc">Image description: </label>
+      <input type="text" id="imagedesc" />
+
+      <br /><br />
+
+      <button type="submit">Update</button>
+    </form>
+
+    <br />
+
+    <code id="result"></code>
+
+    <script src="renderer.js"></script>
+  </body>
+</html>

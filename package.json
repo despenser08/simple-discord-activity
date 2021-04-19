@@ -1,0 +1,31 @@
+{
+  "name": "simple-discord-activity",
+  "version": "0.0.1",
+  "description": "Simple application helps you set discord activity",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/despenser08/simple-discord-activity.git"
+  },
+  "keywords": [
+    "discord",
+    "rpc",
+    "presence",
+    "activity"
+  ],
+  "author": "despenser08",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/despenser08/simple-discord-activity/issues"
+  },
+  "homepage": "https://github.com/despenser08/simple-discord-activity#readme",
+  "devDependencies": {
+    "electron": "^12.0.4"
+  },
+  "dependencies": {
+    "discord-rpc": "^3.2.0"
+  }
+}
