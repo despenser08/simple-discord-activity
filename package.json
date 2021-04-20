@@ -1,6 +1,6 @@
 {
   "name": "simple-discord-activity",
-  "version": "0.0.2",
+  "version": "v0.0.2",
   "description": "Simple application helps you set discord activity",
   "main": "index.js",
   "scripts": {
