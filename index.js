@@ -58,24 +58,20 @@ async function updateActivity(opts) {
 
       if (imageName) {
         config.largeImageKey = imageName;
-
         if (imageDesc) config.largeImageText = imageDesc;
       }
 
       if (smallImageName) {
         config.smallImageKey = smallImageName;
-
         if (smallImageDesc) config.smallImageText = smallImageDesc;
       }
 
       if (button1Name && button1URL) {
         if (!config.buttons) config.buttons = [];
-
         config.buttons.push({ label: button1Name, url: button1URL });
       }
       if (button2Name && button2URL) {
         if (!config.buttons) config.buttons = [];
-
         config.buttons.push({ label: button2Name, url: button2URL });
       }
 
@@ -153,17 +149,18 @@ app.whenReady().then(async () => {
 
   tray = new Tray(path.join(__dirname, "build", "icon.png"));
 
-  const trayMenu = Menu.buildFromTemplate([
-    {
-      label: "Show App",
-      click: () => showWindows(),
-    },
-    {
-      label: "Quit",
-      click: () => app.quit(),
-    },
-  ]);
-  tray.setContextMenu(trayMenu);
+  tray.setContextMenu(
+    Menu.buildFromTemplate([
+      {
+        label: "Show App",
+        click: () => showWindows(),
+      },
+      {
+        label: "Quit",
+        click: () => app.quit(),
+      },
+    ])
+  );
 
   tray.on("double-click", () => showWindows());
 });
@@ -176,13 +173,9 @@ app.on("before-quit", () => {
 });
 
 app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    app.quit();
-  }
+  if (process.platform !== "darwin") app.quit();
 });
 
 app.on("activate", () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
-  }
+  if (BrowserWindow.getAllWindows().length === 0) createWindow();
 });
