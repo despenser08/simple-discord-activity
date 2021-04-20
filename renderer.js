@@ -1,5 +1,42 @@
 const { ipcRenderer } = require("electron");
 
+ipcRenderer.on("set-stored-data", (_, args) => {
+  const {
+    clientId,
+    title,
+    desc,
+    timestamp,
+    imageName,
+    imageDesc,
+    smallImageName,
+    smallImageDesc,
+    button1Name,
+    button1URL,
+    button2Name,
+    button2URL,
+  } = args[0];
+
+  console.log(args[0]);
+
+  document.getElementById("clientid").value = clientId || "";
+
+  document.getElementById("title").value = title || "";
+  document.getElementById("desc").value = desc || "";
+  document.getElementById("timestamp").checked = timestamp || true;
+
+  document.getElementById("imagename").value = imageName || "";
+  document.getElementById("imagedesc").value = imageDesc || "";
+
+  document.getElementById("smallimagename").value = smallImageName || "";
+  document.getElementById("smallimagedesc").value = smallImageDesc || "";
+
+  document.getElementById("button1name").value = button1Name || "";
+  document.getElementById("button1url").value = button1URL || "";
+
+  document.getElementById("button2name").value = button2Name || "";
+  document.getElementById("button2url").value = button2URL || "";
+});
+
 document.getElementById("values").addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -29,12 +66,20 @@ document.getElementById("values").addEventListener("submit", async (e) => {
   resultText.style.color = "yellow";
 
   const res = await ipcRenderer.invoke("update-activity", [
-    clientId,
-    { title, desc, timestamp },
-    { imageName, imageDesc },
-    { smallImageName, smallImageDesc },
-    { button1Name, button1URL },
-    { button2Name, button2URL },
+    {
+      clientId,
+      title,
+      desc,
+      timestamp,
+      imageName,
+      imageDesc,
+      smallImageName,
+      smallImageDesc,
+      button1Name,
+      button1URL,
+      button2Name,
+      button2URL,
+    },
   ]);
 
   resultText.innerHTML = res.message;

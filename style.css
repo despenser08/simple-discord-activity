@@ -11,6 +11,10 @@ textarea {
   color: white;
 }
 
+code {
+  font-family: "Ubuntu", "Arial", sans-serif;
+}
+
 .btn {
   background-color: #7289da;
   color: white;
