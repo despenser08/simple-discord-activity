@@ -19,3 +19,8 @@ code {
   background-color: #7289da;
   color: white;
 }
+
+.btn:disabled {
+  background-color: #4e5d94;
+  color: gray;
+}

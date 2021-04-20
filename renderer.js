@@ -6,6 +6,7 @@ ipcRenderer.on("set-stored-data", (_, args) => {
     title,
     desc,
     timestamp,
+    startTimestamp,
     imageName,
     imageDesc,
     smallImageName,
@@ -23,6 +24,7 @@ ipcRenderer.on("set-stored-data", (_, args) => {
   document.getElementById("title").value = title || "";
   document.getElementById("desc").value = desc || "";
   document.getElementById("timestamp").checked = timestamp || true;
+  document.getElementById("starttimestamp").value = startTimestamp || "";
 
   document.getElementById("imagename").value = imageName || "";
   document.getElementById("imagedesc").value = imageDesc || "";
@@ -45,6 +47,7 @@ document.getElementById("values").addEventListener("submit", async (e) => {
   let title = document.getElementById("title").value;
   let desc = document.getElementById("desc").value;
   let timestamp = document.getElementById("timestamp").checked;
+  let startTimestamp = document.getElementById("starttimestamp").value;
 
   let imageName = document.getElementById("imagename").value;
   let imageDesc = document.getElementById("imagedesc").value;
@@ -71,6 +74,7 @@ document.getElementById("values").addEventListener("submit", async (e) => {
       title,
       desc,
       timestamp,
+      startTimestamp,
       imageName,
       imageDesc,
       smallImageName,

@@ -12,7 +12,7 @@ autoUpdater.logger = log;
 log.info("App starting...");
 
 let mainWin, tray;
-let RPC = new Client({ transport: "ipc" });
+let client = new Client({ transport: "ipc" });
 
 async function updateActivity(opts) {
   return new Promise(async (resolve) => {
@@ -23,6 +23,7 @@ async function updateActivity(opts) {
       title,
       desc,
       timestamp,
+      startTimestamp,
       imageName,
       imageDesc,
       smallImageName,
@@ -33,16 +34,27 @@ async function updateActivity(opts) {
       button2URL,
     } = opts;
 
-    if (RPC.application) await RPC.destroy();
-    RPC = new Client({ transport: "ipc" });
+    log.info("Destroying Client");
+    await client.destroy().catch(() => log.info("Client is not logined"));
+    client = new Client({ transport: "ipc" });
 
-    RPC.on("ready", () => {
+    client.on("ready", () => {
       let config = {
         details: title,
         state: desc,
       };
 
-      if (timestamp) config.startTimestamp = new Date();
+      if (timestamp) {
+        if (startTimestamp) {
+          let date = new Date();
+
+          const startTime = startTimestamp.split(":");
+          date.setHours(startTime[0]);
+          date.setMinutes(startTime[1]);
+
+          config.startTimestamp = date;
+        } else config.startTimestamp = new Date();
+      }
 
       if (imageName) {
         config.largeImageKey = imageName;
@@ -67,10 +79,11 @@ async function updateActivity(opts) {
         config.buttons.push({ label: button2Name, url: button2URL });
       }
 
-      RPC.setActivity(config, process.pid)
+      client
+        .setActivity(config, process.pid)
         .then(async () => {
           log.info("RPC Updated");
-          await storage.getAsync("settings", opts);
+          await storage.setAsync("settings", opts);
           log.info("Saved State");
           return resolve({ success: true, message: "Success!" });
         })
@@ -80,7 +93,7 @@ async function updateActivity(opts) {
         });
     });
 
-    await RPC.login({ clientId }).catch((e) => {
+    await client.login({ clientId }).catch((e) => {
       log.error("Error on RPC: " + e);
       return resolve({ success: false, message: e });
     });
@@ -96,7 +109,7 @@ function showWindows() {
 async function createWindow() {
   mainWin = new BrowserWindow({
     width: 500,
-    height: 500,
+    height: 522,
     maximizable: false,
     resizable: false,
     icon: path.join(__dirname, "build", "icon.png"),
@@ -116,11 +129,13 @@ async function createWindow() {
   mainWin.setResizable(true);
   await mainWin.loadFile("index.html");
   log.info("Loaded main screen");
-  if (await storage.hasAsync("settings"))
+
+  if (await storage.hasAsync("settings")) {
     mainWin.webContents.send("set-stored-data", [
       await storage.getAsync("settings"),
     ]);
-  log.info("Loaded settings");
+    log.info("Loaded settings");
+  }
 
   mainWin.on("minimize", () => {
     mainWin.hide();
@@ -154,7 +169,8 @@ app.whenReady().then(async () => {
 });
 
 app.on("before-quit", () => {
-  if (RPC.application) RPC.destroy();
+  log.info("Destroying Client");
+  client.destroy().catch(() => log.info("Client is not logined"));
   tray.destroy();
   log.info("Quitting");
 });
