@@ -49,8 +49,7 @@ async function updateActivity(opts) {
           let date = new Date();
 
           const startTime = startTimestamp.split(":");
-          date.setHours(startTime[0]);
-          date.setMinutes(startTime[1]);
+          date.setHours(startTime[0], startTime[1], startTime[2], 0);
 
           config.startTimestamp = date;
         } else config.startTimestamp = new Date();
