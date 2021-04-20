@@ -38,6 +38,6 @@ document.getElementById("values").addEventListener("submit", async (e) => {
   ]);
 
   resultText.innerHTML = res.message;
-  resultText.style.color = res.success ? "green" : "red";
+  resultText.style.color = res.success ? "greenyellow" : "lightcoral";
   submitButton.disabled = false;
 });
