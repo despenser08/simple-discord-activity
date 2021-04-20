@@ -39,7 +39,15 @@ ipcRenderer.on("set-stored-data", (_, args) => {
   document.getElementById("button2url").value = button2URL || "";
 });
 
-document.getElementById("values").addEventListener("submit", async (e) => {
+const form = document.getElementById("values");
+
+form.addEventListener("reset", async (e) => {
+  e.preventDefault();
+
+  document.getElementById("starttimestamp").value = "";
+});
+
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   let clientId = document.getElementById("clientid").value;
