@@ -4,8 +4,7 @@
   "description": "Simple application helps you set discord activity",
   "main": "index.js",
   "scripts": {
-    "start": "electron .",
-    "build:win": "electron-builder -w"
+    "start": "electron ."
   },
   "repository": {
     "type": "git",
@@ -37,6 +36,11 @@
     "files": [
       "**/*",
       "build/icon.*"
-    ]
+    ],
+    "win": {
+      "publish": [
+        "github"
+      ]
+    }
   }
 }
