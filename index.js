@@ -69,8 +69,9 @@ async function updateActivity(opts) {
 
       RPC.setActivity(config, process.pid)
         .then(async () => {
-          await storage.getAsync("settings", opts);
           log.info("RPC Updated");
+          await storage.getAsync("settings", opts);
+          log.info("Saved State");
           return resolve({ success: true, message: "Success!" });
         })
         .catch((e) => {
