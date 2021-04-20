@@ -106,7 +106,6 @@ async function createWindow() {
   });
   log.info("Created Main Window");
   Menu.setApplicationMenu(null);
-  log.info("Cleared App Menu");
 
   await mainWin.loadFile("loading.html");
   log.info("Loaded loading screen");
