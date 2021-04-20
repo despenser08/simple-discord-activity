@@ -20,13 +20,21 @@ async function updateActivity(
       let config = {
         details: title,
         state: desc,
-        largeImageKey: imageName,
-        largeImageText: imageDesc,
-        smallImageKey: smallImageName,
-        smallImageText: smallImageDesc,
       };
 
       if (timestamp) config.startTimestamp = new Date();
+
+      if (imageName) {
+        config.largeImageKey = imageName;
+
+        if (imageDesc) config.largeImageText = imageDesc;
+      }
+
+      if (smallImageName) {
+        config.smallImageKey = smallImageName;
+
+        if (smallImageDesc) config.smallImageText = smallImageDesc;
+      }
 
       if (button1Name && button1URL) {
         if (!config.buttons) config.buttons = [];
@@ -52,7 +60,7 @@ async function updateActivity(
 
 function createWindow() {
   const win = new BrowserWindow({
-    width: 475,
+    width: 500,
     height: 500,
     icon: path.join(__dirname, "build", "icon.png"),
     webPreferences: {

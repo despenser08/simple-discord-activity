@@ -36,11 +36,6 @@
     "files": [
       "**/*",
       "build/icon.*"
-    ],
-    "win": {
-      "publish": [
-        "github"
-      ]
-    }
+    ]
   }
 }
