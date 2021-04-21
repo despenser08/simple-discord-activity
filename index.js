@@ -22,8 +22,8 @@ async function updateActivity(opts) {
       clientId,
       title,
       desc,
+      timestampType,
       timestamp,
-      startTimestamp,
       imageName,
       imageDesc,
       smallImageName,
@@ -35,7 +35,10 @@ async function updateActivity(opts) {
     } = opts;
 
     log.info("Destroying Client");
-    await client.destroy().catch(() => log.info("Client is not logined"));
+    await client
+      .destroy()
+      .then(() => log.info("Client destroyed"))
+      .catch(() => log.info("Client is not logined"));
     client = new Client({ transport: "ipc" });
 
     client.on("ready", () => {
@@ -44,15 +47,14 @@ async function updateActivity(opts) {
         state: desc,
       };
 
-      if (timestamp) {
-        if (startTimestamp) {
-          let date = new Date();
+      if (timestampType !== "off" && timestamp) {
+        let date = new Date();
 
-          const startTime = startTimestamp.split(":");
-          date.setHours(startTime[0], startTime[1], startTime[2], 0);
+        const splitTime = timestamp.split(":");
+        date.setHours(splitTime[0], splitTime[1], splitTime[2], 0);
 
-          config.startTimestamp = date;
-        } else config.startTimestamp = new Date();
+        if (timestampType === "start") config.startTimestamp = date;
+        else config.endTimestamp = date;
       }
 
       if (imageName) {
@@ -104,7 +106,7 @@ function showWindows() {
 async function createWindow() {
   mainWin = new BrowserWindow({
     width: 500,
-    height: 522,
+    height: 580,
     maximizable: false,
     resizable: false,
     icon: path.join(__dirname, "build", "icon.png"),
@@ -166,7 +168,10 @@ app.whenReady().then(async () => {
 
 app.on("before-quit", () => {
   log.info("Destroying Client");
-  client.destroy().catch(() => log.info("Client is not logined"));
+  client
+    .destroy()
+    .then(() => log.info("Client destroyed"))
+    .catch(() => log.info("Client is not logined"));
   tray.destroy();
   log.info("Quitting");
 });

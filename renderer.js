@@ -5,8 +5,8 @@ ipcRenderer.on("set-stored-data", (_, args) => {
     clientId,
     title,
     desc,
+    timestampType,
     timestamp,
-    startTimestamp,
     imageName,
     imageDesc,
     smallImageName,
@@ -23,11 +23,12 @@ ipcRenderer.on("set-stored-data", (_, args) => {
 
   document.getElementById("title").value = title || "";
   document.getElementById("desc").value = desc || "";
-  document.getElementById("timestamp").checked = timestamp || true;
-  document.getElementById("starttimestamp").value = startTimestamp || "";
 
   document.getElementById("imagename").value = imageName || "";
   document.getElementById("imagedesc").value = imageDesc || "";
+
+  document.getElementById("timestamptype").value = timestampType || "off";
+  document.getElementById("timestamp").value = timestamp || "";
 
   document.getElementById("smallimagename").value = smallImageName || "";
   document.getElementById("smallimagedesc").value = smallImageDesc || "";
@@ -39,26 +40,25 @@ ipcRenderer.on("set-stored-data", (_, args) => {
   document.getElementById("button2url").value = button2URL || "";
 });
 
-const form = document.getElementById("values");
-
-form.addEventListener("reset", async (e) => {
+document.getElementById("cleartimestamp").addEventListener("click", (e) => {
   e.preventDefault();
 
-  document.getElementById("starttimestamp").value = "";
+  document.getElementById("timestamp").value = "";
 });
 
-form.addEventListener("submit", async (e) => {
+document.getElementById("values").addEventListener("submit", async (e) => {
   e.preventDefault();
 
   let clientId = document.getElementById("clientid").value;
 
   let title = document.getElementById("title").value;
   let desc = document.getElementById("desc").value;
-  let timestamp = document.getElementById("timestamp").checked;
-  let startTimestamp = document.getElementById("starttimestamp").value;
 
   let imageName = document.getElementById("imagename").value;
   let imageDesc = document.getElementById("imagedesc").value;
+
+  let timestampType = document.getElementById("timestamptype").value;
+  let timestamp = document.getElementById("timestamp").value;
 
   let smallImageName = document.getElementById("smallimagename").value;
   let smallImageDesc = document.getElementById("smallimagedesc").value;
@@ -81,8 +81,8 @@ form.addEventListener("submit", async (e) => {
       clientId,
       title,
       desc,
+      timestampType,
       timestamp,
-      startTimestamp,
       imageName,
       imageDesc,
       smallImageName,

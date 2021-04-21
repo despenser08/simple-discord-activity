@@ -28,16 +28,6 @@
           <label for="desc">Description:</label>
           <br />
           <textarea id="desc" cols="18" rows="3" required></textarea>
-          <br />
-          <label for="timestamp">Timestamp:</label>
-          <input type="checkbox" id="timestamp" checked />
-          <br />
-          <label for="starttimestamp">Start Timestamp:</label>
-          <br />
-          <input type="time" id="starttimestamp" step="1" />
-          <button class="btn" type="reset" id="clearstarttimestamp">
-            Clear
-          </button>
 
           <br /><br />
 
@@ -57,6 +47,22 @@
         </div>
 
         <div style="float: right; width: 50%">
+          <strong>Timestamp</strong>
+          <br />
+          <label for="timestamptype">Type:</label>
+          <select id="timestamptype">
+            <option value="off">Off</option>
+            <option value="start">Start</option>
+            <option value="end">End</option>
+          </select>
+          <br />
+          <label for="timestamp">Timestamp:</label>
+          <br />
+          <input type="time" id="timestamp" step="1" />
+          <button class="btn" id="cleartimestamp">Clear</button>
+
+          <br /><br />
+
           <strong>Small Image</strong>
           <br />
           <label for="smallimagename">Name:</label>
