@@ -49,12 +49,17 @@
         <div style="float: right; width: 50%">
           <strong>Timestamp</strong>
           <br />
-          <label for="timestamptype">Type:</label>
-          <select id="timestamptype">
-            <option value="off">Off</option>
-            <option value="start">Start</option>
-            <option value="end">End</option>
-          </select>
+          <input type="radio" name="timestamptype" id="timeoff" value="off" />
+          <label for="timeoff">Off</label>
+          <input
+            type="radio"
+            name="timestamptype"
+            id="timestart"
+            value="start"
+          />
+          <label for="timestart">Start</label>
+          <input type="radio" name="timestamptype" id="timeend" value="end" />
+          <label for="timeend">End</label>
           <br />
           <label for="timestamp">Timestamp:</label>
           <br />

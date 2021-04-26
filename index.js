@@ -11,6 +11,13 @@ autoUpdater.logger = log;
 
 log.info("App starting...");
 
+const lock = app.requestSingleInstanceLock();
+
+if (!lock) {
+  log.info("Another instance is running.");
+  app.quit();
+}
+
 let mainWin, tray;
 let client = new Client({ transport: "ipc" });
 
@@ -97,7 +104,9 @@ async function updateActivity(opts) {
   });
 }
 
-function showWindows() {
+function showWindow() {
+  if (!mainWin) return;
+
   mainWin.show();
   mainWin.focus();
   log.info("App is now visible");
@@ -154,7 +163,7 @@ app.whenReady().then(async () => {
     Menu.buildFromTemplate([
       {
         label: "Show App",
-        click: () => showWindows(),
+        click: () => showWindow(),
       },
       {
         label: "Quit",
@@ -163,8 +172,10 @@ app.whenReady().then(async () => {
     ])
   );
 
-  tray.on("double-click", () => showWindows());
+  tray.on("double-click", () => showWindow());
 });
+
+app.on("second-instance", () => showWindow());
 
 app.on("before-quit", () => {
   log.info("Destroying Client");

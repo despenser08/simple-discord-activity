@@ -27,7 +27,7 @@ ipcRenderer.on("set-stored-data", (_, args) => {
   document.getElementById("imagename").value = imageName || "";
   document.getElementById("imagedesc").value = imageDesc || "";
 
-  document.getElementById("timestamptype").value = timestampType || "off";
+  document.getElementById("time" + timestampType || "off").checked = true;
   document.getElementById("timestamp").value = timestamp || "";
 
   document.getElementById("smallimagename").value = smallImageName || "";
@@ -46,6 +46,12 @@ document.getElementById("cleartimestamp").addEventListener("click", (e) => {
   document.getElementById("timestamp").value = "";
 });
 
+function getTimestampType() {
+  if (document.getElementById("timeoff").checked) return "off";
+  else if (document.getElementById("timestart").checked) return "start";
+  else return "end";
+}
+
 document.getElementById("values").addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -57,7 +63,7 @@ document.getElementById("values").addEventListener("submit", async (e) => {
   let imageName = document.getElementById("imagename").value;
   let imageDesc = document.getElementById("imagedesc").value;
 
-  let timestampType = document.getElementById("timestamptype").value;
+  let timestampType = getTimestampType();
   let timestamp = document.getElementById("timestamp").value;
 
   let smallImageName = document.getElementById("smallimagename").value;
