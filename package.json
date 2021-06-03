@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/despenser08/simple-discord-activity#readme",
   "devDependencies": {
-    "electron": "13.0.1",
+    "electron": "13.1.0",
     "electron-builder": "22.11.5"
   },
   "dependencies": {
