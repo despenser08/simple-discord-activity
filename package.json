@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "bluebird": "^3.7.2",
-    "discord-rpc": "^3.2.0",
+    "discord-rpc": "^4.0.0",
     "electron-json-storage": "^4.5.0",
     "electron-log": "^4.3.5",
     "electron-updater": "^4.3.8"
