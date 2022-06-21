@@ -24,7 +24,7 @@
   "homepage": "https://github.com/despenser08/simple-discord-activity#readme",
   "devDependencies": {
     "electron": "19.0.5",
-    "electron-builder": "23.0.3"
+    "electron-builder": "23.1.0"
   },
   "dependencies": {
     "bluebird": "^3.7.2",
