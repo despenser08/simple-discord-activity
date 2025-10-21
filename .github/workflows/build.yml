@@ -13,7 +13,7 @@ jobs:
       - name: Install Node v14
         uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: 22.21.0
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
